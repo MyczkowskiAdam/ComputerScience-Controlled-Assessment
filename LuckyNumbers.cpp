@@ -110,6 +110,39 @@ int main() {
 
 	//TODO
 	// Separate digits in the number into an array
+	//cout << "Separate int into digits" << endl;
+	//int dig2FN = FrNmVal % 10;
+	//cout << dig2FN;
+	int c_FrNmVal = FrNmVal;
+	int c_LstNmVal = LstNmVal;
+	bool LessThan9FN;
+	bool LessThan9LN;
+	if (FrNmVal > 9) {
+		LessThan9FN = false;
+	}
+	else {
+		LessThan9FN = true;
+	}
+	if (LstNmVal > 9) {
+		LessThan9LN = false;
+	}
+	else {
+		LessThan9LN = true;
+	}
+	if (LessThan9FN == false) {
+		//TODO
+	}
+	else {
+		//TODO
+	}
+	if (LessThan9LN == false) {
+		//TODO
+	}
+	else {
+		//TODO
+	}
+
 
 	return 0;
 }
+
