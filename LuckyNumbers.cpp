@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 1.1
+// Version     : 1.11
 // Description : Lucky number calculator
 //============================================================================
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
+#include <cstdlib>
 using namespace std;
 
 // VARIABLES USED
@@ -73,6 +74,7 @@ int main() {
 		}
 		else {
 			cout << "Invalid character " << FrNmAr[i] << " ,please try again!";
+			return EXIT_FAILURE;
 		}
 		//Staging - check if the value is being add up correctly
 		//cout << i << ". " << FrNmVal << endl;
@@ -115,6 +117,7 @@ int main() {
 		}
 		else {
 			cout << "Invalid character " << LstNmAr[i] << " ,please try again!";
+			return EXIT_FAILURE;
 		}
 		//Staging - check if the value is being add up correctly
 		//cout << i << ". " << LstNmVal << endl;
