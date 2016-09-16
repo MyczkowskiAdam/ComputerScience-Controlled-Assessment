@@ -30,7 +30,7 @@ int main() {
 	cin >> FrNm;
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
 
-	for (int i=0; i<FrNm.length(); i++) {
+	for (unsigned int i=0; i<FrNm.length(); i++) {
 		if (FrNmAr[i] == alphabet[0] || FrNmAr[i] == alphabet[9] || FrNmAr[i] == alphabet[18] ) {
 			FrNmVal += 1;
 		}
@@ -72,7 +72,7 @@ int main() {
 	cin >> LstNm;
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
 
-	for (int i=0; i<LstNm.length(); i++) {
+	for (unsigned int i=0; i<LstNm.length(); i++) {
 		if (LstNmAr[i] == alphabet[0] || LstNmAr[i] == alphabet[9] || LstNmAr[i] == alphabet[18] ) {
 			LstNmVal += 1;
 		}
