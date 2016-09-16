@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 0.2
-// Description : Lucky number calculator (WIP)
+// Version     : 1.0
+// Description : Lucky number calculator
 //============================================================================
 
 //==========CHEATSHEET================
@@ -18,6 +18,16 @@
 using namespace std;
 
 // VARIABLES USED
+string lucky1 = "Natural leader";
+string lucky2 = "Natural peacemaker";
+string lucky3 = "Creative and optimistic";
+string lucky4 = "Hard worker";
+string lucky5 = "Value freedom";
+string lucky6 = "Carer and provider";
+string lucky7 = "Thinker";
+string lucky8 = "Have diplomatic skills";
+string lucky9 = "Selfless and generous";
+
 int FrNmVal = 0; //Total value of First Name converted from letter to number values
 int LstNmVal = 0; //Total value of Last Name converted from letter to number values
 char alphabet[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' }; //Letters of alphabet used throughout the program
@@ -25,12 +35,14 @@ char alphabet[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'
 //main prog
 int main() {
 
+	cout << "Hi there! This program is here to calculate your lucky number and give you its meaning!! Please follow the instructions to find out what our lucky number is! :)" << endl;
+
 	cout << "Enter FIRST name here >> " << flush;
 	string FrNm;
 	cin >> FrNm;
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
 
-	for (unsigned int i=0; i<FrNm.length(); i++) {
+	for (unsigned int i=0; i<FrNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
 		if (FrNmAr[i] == alphabet[0] || FrNmAr[i] == alphabet[9] || FrNmAr[i] == alphabet[18] ) {
 			FrNmVal += 1;
 		}
@@ -62,9 +74,9 @@ int main() {
 			cout << "Invalid character " << FrNmAr[i] << " ,please try again!";
 		}
 		//Staging - check if the value is being add up correctly
-		cout << i << ". " << FrNmVal << endl;
+		//cout << i << ". " << FrNmVal << endl;
 	}
-	cout << "Total is " << FrNmVal << endl; //My name (adam) should be 1 + 4 + 1 + 4 = 10, lets see...
+	//cout << "Total is " << FrNmVal << endl; //My name (adam) should be 1 + 4 + 1 + 4 = 10, lets see...
 
 
 	cout << "Enter LAST name here >> " << flush;
@@ -72,7 +84,7 @@ int main() {
 	cin >> LstNm;
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
 
-	for (unsigned int i=0; i<LstNm.length(); i++) {
+	for (unsigned int i=0; i<LstNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
 		if (LstNmAr[i] == alphabet[0] || LstNmAr[i] == alphabet[9] || LstNmAr[i] == alphabet[18] ) {
 			LstNmVal += 1;
 		}
@@ -104,44 +116,70 @@ int main() {
 			cout << "Invalid character " << LstNmAr[i] << " ,please try again!";
 		}
 		//Staging - check if the value is being add up correctly
-		cout << i << ". " << LstNmVal << endl;
+		//cout << i << ". " << LstNmVal << endl;
 	}
-	cout << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
+	//cout << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
-	//TODO
-	// Separate digits in the number into an array
-	//cout << "Separate int into digits" << endl;
-	//int dig2FN = FrNmVal % 10;
-	//cout << dig2FN;
+
 	int c_FrNmVal = FrNmVal;
 	int c_LstNmVal = LstNmVal;
-	bool LessThan9FN;
-	bool LessThan9LN;
-	if (FrNmVal > 9) {
-		LessThan9FN = false;
-	}
-	else {
-		LessThan9FN = true;
-	}
-	if (LstNmVal > 9) {
-		LessThan9LN = false;
-	}
-	else {
-		LessThan9LN = true;
-	}
-	if (LessThan9FN == false) {
-		//TODO
-	}
-	else {
-		//TODO
-	}
-	if (LessThan9LN == false) {
-		//TODO
-	}
-	else {
-		//TODO
-	}
 
+	while (c_FrNmVal > 9) { //split integer into digits
+		int dig1 = (c_FrNmVal / 10) % 10;
+		int dig2 = c_FrNmVal % 10;
+		c_FrNmVal = dig1 + dig2;
+		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
+		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
+	}
+	//cout << c_FrNmVal << endl; //Check if it returns right integer (enable to debug)
+
+	while (c_LstNmVal > 9) { //split integer into digits
+		int dig1 = (c_LstNmVal / 10) % 10;
+		int dig2 = c_LstNmVal % 10;
+		c_LstNmVal = dig1 + dig2;
+		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
+		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
+	}
+	//cout << c_LstNmVal << endl; //Check if it returns right integer (enable to debug)
+
+	int LuckyNumber = c_FrNmVal + c_LstNmVal;
+
+	while (LuckyNumber > 9) { //split integer into digits
+		int dig1 = (LuckyNumber / 10) % 10;
+		int dig2 = LuckyNumber % 10;
+		LuckyNumber = dig1 + dig2;
+		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
+		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
+	}
+	cout << "Okay then " << FrNm << " " << LstNm << endl;
+	cout << "Your lucky number is " << LuckyNumber << "!! What does it tell about about you? What is its meaning?" << endl;
+	if ( LuckyNumber == 1) {
+		cout << "Number: " << LuckyNumber << " Meaning: " << lucky1 << endl;
+	}
+	else if ( LuckyNumber == 2) {
+		cout << "Number: " << LuckyNumber << " Meaning: " << lucky2 << endl;
+	}
+	else if ( LuckyNumber == 3) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky3 << endl;
+	}
+	else if ( LuckyNumber == 4) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky4 << endl;
+	}
+	else if ( LuckyNumber == 5) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky5 << endl;
+	}
+	else if ( LuckyNumber == 6) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky6 << endl;
+	}
+	else if ( LuckyNumber == 7) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky7 << endl;
+	}
+	else if ( LuckyNumber == 8) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky8 << endl;
+	}
+	else if ( LuckyNumber == 9) {
+			cout << "Number: " << LuckyNumber << " Meaning: " << lucky9 << endl;
+	}
 
 	return 0;
 }
