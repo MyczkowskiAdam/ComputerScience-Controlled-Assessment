@@ -29,6 +29,7 @@
 #include <string>
 #include <stdio.h>
 #include <cstdlib>
+#include <conio.h>
 using namespace std;
 
 // VARIABLES USED
@@ -87,7 +88,12 @@ int main() {
 		}
 		else {
 			cout << "Invalid character " << FrNmAr[i] << " ,please try again!";
-			return EXIT_FAILURE;
+			cout << " Press any key to exit" << endl;
+			while (true) {
+				if (_kbhit()) {
+					return EXIT_FAILURE;
+				}
+			}
 		}
 		//Staging - check if the value is being add up correctly
 		//cout << i << ". " << FrNmVal << endl;
@@ -130,7 +136,12 @@ int main() {
 		}
 		else {
 			cout << "Invalid character " << LstNmAr[i] << " ,please try again!";
-			return EXIT_FAILURE;
+			cout << " Press any key to exit" << endl;
+			while (true) {
+				if (_kbhit()) {
+					return EXIT_FAILURE;
+				}
+			}
 		}
 		//Staging - check if the value is being add up correctly
 		//cout << i << ". " << LstNmVal << endl;
@@ -216,6 +227,13 @@ int main() {
 			cout << "Number: " << LuckyNumber << " Meaning: " << lucky9 << endl;
 	}
 
+	cout << "Press any key to exit" << endl;
+	while (true) {
+		if (_kbhit()) {
+			return EXIT_SUCCESS;
+		}
+	}
+	
 	return 0;
 }
 
