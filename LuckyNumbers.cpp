@@ -144,7 +144,13 @@ int main() {
 	while (c_FrNmVal > 9) { //split integer into digits
 		int dig1 = (c_FrNmVal / 10) % 10;
 		int dig2 = c_FrNmVal % 10;
-		c_FrNmVal = dig1 + dig2;
+		if (c_FrNmVal > 99) {
+			int dig3 = (c_FrNmVal / 100) % 10;
+			c_FrNmVal = dig1 + dig2 + dig3;
+		}
+		else {
+			c_FrNmVal = dig1 + dig2;
+		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
@@ -153,7 +159,13 @@ int main() {
 	while (c_LstNmVal > 9) { //split integer into digits
 		int dig1 = (c_LstNmVal / 10) % 10;
 		int dig2 = c_LstNmVal % 10;
-		c_LstNmVal = dig1 + dig2;
+		if (c_LstNmVal > 99) {
+			int dig3 = (c_LstNmVal / 100) % 10;
+			c_LstNmVal = dig1 + dig2 + dig3;
+		}
+		else {
+			c_LstNmVal = dig1 + dig2;
+		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
@@ -164,7 +176,13 @@ int main() {
 	while (LuckyNumber > 9) { //split integer into digits
 		int dig1 = (LuckyNumber / 10) % 10;
 		int dig2 = LuckyNumber % 10;
-		LuckyNumber = dig1 + dig2;
+		if (LuckyNumber > 99) {
+			int dig3 = (LuckyNumber / 100) % 10;
+			LuckyNumber = dig1 + dig2 + dig3;
+		}
+		else {
+			LuckyNumber = dig1 + dig2;
+		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
