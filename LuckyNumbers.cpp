@@ -1,20 +1,19 @@
-
- //Licensed under the Apache License, Version 2.0 (the "License");
- //you may not use this file except in compliance with the License.
- //You may obtain a copy of the License at
-
- //     http://www.apache.org/licenses/LICENSE-2.0
-
- //Unless required by applicable law or agreed to in writing, software
- //distributed under the License is distributed on an "AS IS" BASIS,
- //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- //See the License for the specific language governing permissions and
- //limitations under the License.
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
 
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 1.11
+// Version     : 2.0
 // Description : Lucky number calculator
 //============================================================================
 
@@ -30,6 +29,7 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <conio.h>
+#include <fstream>
 using namespace std;
 
 // VARIABLES USED
@@ -47,15 +47,19 @@ int FrNmVal = 0; //Total value of First Name converted from letter to number val
 int LstNmVal = 0; //Total value of Last Name converted from letter to number values
 char alphabet[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' }; //Letters of alphabet used throughout the program
 char CAPalphabet[26] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' }; //Capital letters of alphabet used throughout the program
+ofstream LOG;
 
 //main prog
 int main() {
+
+	LOG.open("LOG.txt", ios::app);
 
 	cout << "Hi there! This program is here to calculate your lucky number and give you its meaning!! Please follow the instructions to find out what our lucky number is! :)" << endl;
 
 	cout << "Enter FIRST name here >> " << flush;
 	string FrNm;
 	cin >> FrNm;
+	LOG << "First name: " << FrNm << endl;
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<FrNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
@@ -96,14 +100,15 @@ int main() {
 			}
 		}
 		//Staging - check if the value is being add up correctly
-		//cout << i << ". " << FrNmVal << endl;
+		LOG << i + 1 << ". " << FrNmVal << endl;
 	}
-	//cout << "Total is " << FrNmVal << endl; //My name (adam) should be 1 + 4 + 1 + 4 = 10, lets see...
+	LOG << "Total is " << FrNmVal << endl; //My name (adam) should be 1 + 4 + 1 + 4 = 10, lets see...
 
 
 	cout << "Enter LAST name here >> " << flush;
 	string LstNm;
 	cin >> LstNm;
+	LOG << "Last Name: " << LstNm << endl;
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<LstNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
@@ -144,9 +149,9 @@ int main() {
 			}
 		}
 		//Staging - check if the value is being add up correctly
-		//cout << i << ". " << LstNmVal << endl;
+		LOG << i + 1 << ". " << LstNmVal << endl;
 	}
-	//cout << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
+	LOG << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
 
 	int c_FrNmVal = FrNmVal;
@@ -158,14 +163,19 @@ int main() {
 		if (c_FrNmVal > 99) {
 			int dig3 = (c_FrNmVal / 100) % 10;
 			c_FrNmVal = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
+			LOG << "Dig3 is: " << dig3 << " , " << flush;
 		}
 		else {
 			c_FrNmVal = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
-	//cout << c_FrNmVal << endl; //Check if it returns right integer (enable to debug)
+	LOG << "First name digit: " << c_FrNmVal << endl; //Check if it returns right integer (enable to debug)
 
 	while (c_LstNmVal > 9) { //split integer into digits
 		int dig1 = (c_LstNmVal / 10) % 10;
@@ -173,14 +183,19 @@ int main() {
 		if (c_LstNmVal > 99) {
 			int dig3 = (c_LstNmVal / 100) % 10;
 			c_LstNmVal = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
+			LOG << "Dig3 is: " << dig3 << " , " << flush;
 		}
 		else {
 			c_LstNmVal = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
-	//cout << c_LstNmVal << endl; //Check if it returns right integer (enable to debug)
+	LOG << "Last name digit: " << c_LstNmVal << endl; //Check if it returns right integer (enable to debug)
 
 	int LuckyNumber = c_FrNmVal + c_LstNmVal;
 
@@ -190,13 +205,19 @@ int main() {
 		if (LuckyNumber > 99) {
 			int dig3 = (LuckyNumber / 100) % 10;
 			LuckyNumber = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
+			LOG << "Dig3 is: " << dig3 << " , " << flush; 
 		}
 		else {
 			LuckyNumber = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 		//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
+	LOG << "Your lucky number is: " << LuckyNumber << endl; //Check if it returns right integer (enable to debug)
 	cout << "Okay then " << FrNm << " " << LstNm << endl;
 	cout << "Your lucky number is " << LuckyNumber << "!! What does it tell about about you? What is its meaning?" << endl;
 	if ( LuckyNumber == 1) {
@@ -230,10 +251,13 @@ int main() {
 	cout << "Press any key to exit" << endl;
 	while (true) {
 		if (_kbhit()) {
+			LOG << "Session succeeded" << endl;
+			LOG.close();
 			return EXIT_SUCCESS;
 		}
 	}
 	
+	LOG.close();
 	return 0;
 }
 

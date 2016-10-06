@@ -27,10 +27,14 @@ For example, Eleanor Wiseman would be:
 
 To carry out the calculation all the numbers for the first name are added together as are all
 the numbers for the surname.
+
 		= {5 + 3 + 5 + 1 + 5 + 6 + 9} + {5 + 9 + 1 + 5 + 4 + 1 + 5}
 		= 34 + 30
+
 These numbers are added again until the answer is a single digit.
+
 		= 7 + 3
 		= 10
 		= 1
+
 So Eleanor’s lucky name number would be 1.
