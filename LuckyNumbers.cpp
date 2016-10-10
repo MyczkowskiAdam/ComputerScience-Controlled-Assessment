@@ -163,9 +163,12 @@ int main() {
 		if (c_FrNmVal > 99) {
 			int dig3 = (c_FrNmVal / 100) % 10;
 			c_FrNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
-			LOG << "Dig3 is: " << dig3 << " , " << flush;
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			// dig3 is actually the farest number to to left when 3-digit number is called,
+			// changing int names would introduce too much mess to the program hence
+			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			c_FrNmVal = dig1 + dig2;
@@ -183,9 +186,12 @@ int main() {
 		if (c_LstNmVal > 99) {
 			int dig3 = (c_LstNmVal / 100) % 10;
 			c_LstNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
-			LOG << "Dig3 is: " << dig3 << " , " << flush;
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			// dig3 is actually the farest number to to left when 3-digit number is called,
+			// changing int names would introduce too much mess to the program hence
+			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			c_LstNmVal = dig1 + dig2;
@@ -205,9 +211,12 @@ int main() {
 		if (LuckyNumber > 99) {
 			int dig3 = (LuckyNumber / 100) % 10;
 			LuckyNumber = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
-			LOG << "Dig3 is: " << dig3 << " , " << flush; 
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			// dig3 is actually the farest number to to left when 3-digit number is called,
+			// changing int names would introduce too much mess to the program hence
+			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			LuckyNumber = dig1 + dig2;
