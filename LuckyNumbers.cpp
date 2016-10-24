@@ -26,7 +26,6 @@
 
 #include <iostream>
 #include <string>
-#include <stdio.h>
 #include <cstdlib>
 #include <conio.h>
 #include <fstream>
