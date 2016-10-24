@@ -44,8 +44,6 @@ string lucky9 = "Selfless and generous";
 
 int FrNmVal = 0; //Total value of First Name converted from letter to number values
 int LstNmVal = 0; //Total value of Last Name converted from letter to number values
-char alphabet[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' }; //Letters of alphabet used throughout the program
-char CAPalphabet[26] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' }; //Capital letters of alphabet used throughout the program
 ofstream LOG;
 
 //main prog
@@ -62,34 +60,78 @@ int main() {
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<FrNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
-		if (FrNmAr[i] == alphabet[0] || FrNmAr[i] == alphabet[9] || FrNmAr[i] == alphabet[18] || FrNmAr[i] == CAPalphabet[0] || FrNmAr[i] == CAPalphabet[9] || FrNmAr[i] == CAPalphabet[18]) {
+		switch (FrNmAr[i]) {
+		case 'a':
+		case 'j':
+		case 's':
+		case 'A':
+		case 'J':
+		case 'S':
 			FrNmVal += 1;
-		}
-		else if (FrNmAr[i] == alphabet[1] || FrNmAr[i] == alphabet[10] || FrNmAr[i] == alphabet[19] || FrNmAr[i] == CAPalphabet[1] || FrNmAr[i] == CAPalphabet[10] || FrNmAr[i] == CAPalphabet[19]) {
+			break;
+		case 'b':
+		case 'k':
+		case 't':
+		case 'B':
+		case 'K':
+		case 'T':
 			FrNmVal += 2;
-		}
-		else if (FrNmAr[i] == alphabet[2] || FrNmAr[i] == alphabet[11] || FrNmAr[i] == alphabet[20] || FrNmAr[i] == CAPalphabet[2] || FrNmAr[i] == CAPalphabet[11] || FrNmAr[i] == CAPalphabet[20]) {
+			break;
+		case 'c':
+		case 'l':
+		case 'u':
+		case 'C':
+		case 'L':
+		case 'U':
 			FrNmVal += 3;
-		}
-		else if (FrNmAr[i] == alphabet[3] || FrNmAr[i] == alphabet[12] || FrNmAr[i] == alphabet[21] || FrNmAr[i] == CAPalphabet[3] || FrNmAr[i] == CAPalphabet[12] || FrNmAr[i] == CAPalphabet[21]) {
+			break;
+		case 'd':
+		case 'm':
+		case 'v':
+		case 'D':
+		case 'M':
+		case 'V':
 			FrNmVal += 4;
-		}
-		else if (FrNmAr[i] == alphabet[4] || FrNmAr[i] == alphabet[13] || FrNmAr[i] == alphabet[22] || FrNmAr[i] == CAPalphabet[4] || FrNmAr[i] == CAPalphabet[13] || FrNmAr[i] == CAPalphabet[22]) {
+			break;
+		case 'e':
+		case 'n':
+		case 'w':
+		case 'E':
+		case 'N':
+		case 'W':
 			FrNmVal += 5;
-		}
-		else if (FrNmAr[i] == alphabet[5] || FrNmAr[i] == alphabet[14] || FrNmAr[i] == alphabet[23] || FrNmAr[i] == CAPalphabet[5] || FrNmAr[i] == CAPalphabet[14] || FrNmAr[i] == CAPalphabet[23] ) {
+			break;
+		case 'f':
+		case 'o':
+		case 'x':
+		case 'F':
+		case 'O':
+		case 'X':
 			FrNmVal += 6;
-		}
-		else if (FrNmAr[i] == alphabet[6] || FrNmAr[i] == alphabet[15] || FrNmAr[i] == alphabet[24] || FrNmAr[i] == CAPalphabet[6] || FrNmAr[i] == CAPalphabet[15] || FrNmAr[i] == CAPalphabet[24]) {
+			break;
+		case 'g':
+		case 'p':
+		case 'y':
+		case 'G':
+		case 'P':
+		case 'Y':
 			FrNmVal += 7;
-		}
-		else if (FrNmAr[i] == alphabet[7] || FrNmAr[i] == alphabet[16] || FrNmAr[i] == alphabet[25] || FrNmAr[i] == CAPalphabet[7] || FrNmAr[i] == CAPalphabet[16] || FrNmAr[i] == CAPalphabet[25]) {
+			break;
+		case 'h':
+		case 'q':
+		case 'z':
+		case 'H':
+		case 'Q':
+		case 'Z':
 			FrNmVal += 8;
-		}
-		else if (FrNmAr[i] == alphabet[8] || FrNmAr[i] == alphabet[17] || FrNmAr[i] == CAPalphabet[8] || FrNmAr[i] == CAPalphabet[17] ) {
+			break;
+		case 'i':
+		case 'r':
+		case 'I':
+		case 'R':
 			FrNmVal += 9;
-		}
-		else {
+			break;
+		default:
 			cout << "Invalid character " << FrNmAr[i] << " ,please try again!";
 			cout << " Press any key to exit" << endl;
 			while (true) {
@@ -111,34 +153,78 @@ int main() {
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<LstNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
-		if (LstNmAr[i] == alphabet[0] || LstNmAr[i] == alphabet[9] || LstNmAr[i] == alphabet[18] || LstNmAr[i] == CAPalphabet[0] || LstNmAr[i] == CAPalphabet[9] || LstNmAr[i] == CAPalphabet[18]) {
+		switch (LstNmAr[i]) {
+		case 'a':
+		case 'j':
+		case 's':
+		case 'A':
+		case 'J':
+		case 'S':
 			LstNmVal += 1;
-		}
-		else if (LstNmAr[i] == alphabet[1] || LstNmAr[i] == alphabet[10] || LstNmAr[i] == alphabet[19] || LstNmAr[i] == CAPalphabet[1] || LstNmAr[i] == CAPalphabet[10] || LstNmAr[i] == CAPalphabet[19]) {
+			break;
+		case 'b':
+		case 'k':
+		case 't':
+		case 'B':
+		case 'K':
+		case 'T':
 			LstNmVal += 2;
-		}
-		else if (LstNmAr[i] == alphabet[2] || LstNmAr[i] == alphabet[11] || LstNmAr[i] == alphabet[20] || LstNmAr[i] == CAPalphabet[2] || LstNmAr[i] == CAPalphabet[11] || LstNmAr[i] == CAPalphabet[20]) {
+			break;
+		case 'c':
+		case 'l':
+		case 'u':
+		case 'C':
+		case 'L':
+		case 'U':
 			LstNmVal += 3;
-		}
-		else if (LstNmAr[i] == alphabet[3] || LstNmAr[i] == alphabet[12] || LstNmAr[i] == alphabet[21] || LstNmAr[i] == CAPalphabet[3] || LstNmAr[i] == CAPalphabet[12] || LstNmAr[i] == CAPalphabet[21]) {
+			break;
+		case 'd':
+		case 'm':
+		case 'v':
+		case 'D':
+		case 'M':
+		case 'V':
 			LstNmVal += 4;
-		}
-		else if (LstNmAr[i] == alphabet[4] || LstNmAr[i] == alphabet[13] || LstNmAr[i] == alphabet[22] || LstNmAr[i] == CAPalphabet[4] || LstNmAr[i] == CAPalphabet[13] || LstNmAr[i] == CAPalphabet[22] ) {
+			break;
+		case 'e':
+		case 'n':
+		case 'w':
+		case 'E':
+		case 'N':
+		case 'W':
 			LstNmVal += 5;
-		}
-		else if (LstNmAr[i] == alphabet[5] || LstNmAr[i] == alphabet[14] || LstNmAr[i] == alphabet[23] || LstNmAr[i] == CAPalphabet[5] || LstNmAr[i] == CAPalphabet[14] || LstNmAr[i] == CAPalphabet[23] ) {
+			break;
+		case 'f':
+		case 'o':
+		case 'x':
+		case 'F':
+		case 'O':
+		case 'X':
 			LstNmVal += 6;
-		}
-		else if (LstNmAr[i] == alphabet[6] || LstNmAr[i] == alphabet[15] || LstNmAr[i] == alphabet[24] || LstNmAr[i] == CAPalphabet[6] || LstNmAr[i] == CAPalphabet[15] || LstNmAr[i] == CAPalphabet[24] ) {
+			break;
+		case 'g':
+		case 'p':
+		case 'y':
+		case 'G':
+		case 'P':
+		case 'Y':
 			LstNmVal += 7;
-		}
-		else if (LstNmAr[i] == alphabet[7] || LstNmAr[i] == alphabet[16] || LstNmAr[i] == alphabet[25] || LstNmAr[i] == CAPalphabet[7] || LstNmAr[i] == CAPalphabet[16] || LstNmAr[i] == CAPalphabet[25] ) {
+			break;
+		case 'h':
+		case 'q':
+		case 'z':
+		case 'H':
+		case 'Q':
+		case 'Z':
 			LstNmVal += 8;
-		}
-		else if (LstNmAr[i] == alphabet[8] || LstNmAr[i] == alphabet[17] || LstNmAr[i] == CAPalphabet[8] || LstNmAr[i] == CAPalphabet[17]) {
+			break;
+		case 'i':
+		case 'r':
+		case 'I':
+		case 'R':
 			LstNmVal += 9;
-		}
-		else {
+			break;
+		default:
 			cout << "Invalid character " << LstNmAr[i] << " ,please try again!";
 			cout << " Press any key to exit" << endl;
 			while (true) {
