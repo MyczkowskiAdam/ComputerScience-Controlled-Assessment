@@ -13,7 +13,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 2.0
+// Version     : 2.1
 // Description : Lucky number calculator
 //============================================================================
 
@@ -42,8 +42,12 @@ string lucky7 = "Thinker";
 string lucky8 = "Have diplomatic skills";
 string lucky9 = "Selfless and generous";
 
+string alphabet =  "abcdefghijklmnopqrstuvwxyz"; //Letters of alphabet used throughout the program
+string CAPalphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //Capital letters of alphabet used throughout the program
+
 int FrNmVal = 0; //Total value of First Name converted from letter to number values
 int LstNmVal = 0; //Total value of Last Name converted from letter to number values
+int tmp;
 ofstream LOG;
 
 //main prog
@@ -60,86 +64,21 @@ int main() {
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<FrNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
-		switch (FrNmAr[i]) {
-		case 'a':
-		case 'j':
-		case 's':
-		case 'A':
-		case 'J':
-		case 'S':
-			FrNmVal += 1;
-			break;
-		case 'b':
-		case 'k':
-		case 't':
-		case 'B':
-		case 'K':
-		case 'T':
-			FrNmVal += 2;
-			break;
-		case 'c':
-		case 'l':
-		case 'u':
-		case 'C':
-		case 'L':
-		case 'U':
-			FrNmVal += 3;
-			break;
-		case 'd':
-		case 'm':
-		case 'v':
-		case 'D':
-		case 'M':
-		case 'V':
-			FrNmVal += 4;
-			break;
-		case 'e':
-		case 'n':
-		case 'w':
-		case 'E':
-		case 'N':
-		case 'W':
-			FrNmVal += 5;
-			break;
-		case 'f':
-		case 'o':
-		case 'x':
-		case 'F':
-		case 'O':
-		case 'X':
-			FrNmVal += 6;
-			break;
-		case 'g':
-		case 'p':
-		case 'y':
-		case 'G':
-		case 'P':
-		case 'Y':
-			FrNmVal += 7;
-			break;
-		case 'h':
-		case 'q':
-		case 'z':
-		case 'H':
-		case 'Q':
-		case 'Z':
-			FrNmVal += 8;
-			break;
-		case 'i':
-		case 'r':
-		case 'I':
-		case 'R':
-			FrNmVal += 9;
-			break;
-		default:
-			cout << "Invalid character " << FrNmAr[i] << " ,please try again!";
-			cout << " Press any key to exit" << endl;
-			while (true) {
-				if (_kbhit()) {
-					return EXIT_FAILURE;
+		tmp = alphabet.find(FrNmAr[i]); //function that returns the position of a character it loops through from a alphabet character 
+		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+			tmp = CAPalphabet.find(FrNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+				cout << "Invalid character " << FrNmAr[i] << " ,please try again! Press any key to exit" << endl;
+				while (true) {
+					if (_kbhit()) {
+						LOG << "Session Failed" << endl;
+						LOG.close();
+						return EXIT_FAILURE;
+					}
 				}
 			}
 		}
+		FrNmVal += (tmp % 9) + 1; // for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
 		//Staging - check if the value is being add up correctly
 		LOG << i + 1 << ". " << FrNmVal << endl;
 	}
@@ -153,86 +92,21 @@ int main() {
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
 
 	for (unsigned int i=0; i<LstNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
-		switch (LstNmAr[i]) {
-		case 'a':
-		case 'j':
-		case 's':
-		case 'A':
-		case 'J':
-		case 'S':
-			LstNmVal += 1;
-			break;
-		case 'b':
-		case 'k':
-		case 't':
-		case 'B':
-		case 'K':
-		case 'T':
-			LstNmVal += 2;
-			break;
-		case 'c':
-		case 'l':
-		case 'u':
-		case 'C':
-		case 'L':
-		case 'U':
-			LstNmVal += 3;
-			break;
-		case 'd':
-		case 'm':
-		case 'v':
-		case 'D':
-		case 'M':
-		case 'V':
-			LstNmVal += 4;
-			break;
-		case 'e':
-		case 'n':
-		case 'w':
-		case 'E':
-		case 'N':
-		case 'W':
-			LstNmVal += 5;
-			break;
-		case 'f':
-		case 'o':
-		case 'x':
-		case 'F':
-		case 'O':
-		case 'X':
-			LstNmVal += 6;
-			break;
-		case 'g':
-		case 'p':
-		case 'y':
-		case 'G':
-		case 'P':
-		case 'Y':
-			LstNmVal += 7;
-			break;
-		case 'h':
-		case 'q':
-		case 'z':
-		case 'H':
-		case 'Q':
-		case 'Z':
-			LstNmVal += 8;
-			break;
-		case 'i':
-		case 'r':
-		case 'I':
-		case 'R':
-			LstNmVal += 9;
-			break;
-		default:
-			cout << "Invalid character " << LstNmAr[i] << " ,please try again!";
-			cout << " Press any key to exit" << endl;
-			while (true) {
-				if (_kbhit()) {
-					return EXIT_FAILURE;
+		tmp = alphabet.find(LstNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
+		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+			tmp = CAPalphabet.find(LstNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+				cout << "Invalid character " << LstNmAr[i] << " ,please try again! Press any key to exit" << endl;
+				while (true) {
+					if (_kbhit()) {
+						LOG << "Session Failed" << endl;
+						LOG.close();
+						return EXIT_FAILURE;
+					}
 				}
 			}
 		}
+		LstNmVal += (tmp % 9) + 1; // for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
 		//Staging - check if the value is being add up correctly
 		LOG << i + 1 << ". " << LstNmVal << endl;
 	}
