@@ -13,7 +13,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 2.1
+// Version     : 2.2-linux
 // Description : Lucky number calculator
 //============================================================================
 
@@ -27,7 +27,6 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <conio.h>
 #include <fstream>
 using namespace std;
 
@@ -68,14 +67,10 @@ int main() {
 		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
 			tmp = CAPalphabet.find(FrNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
 			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
-				cout << "Invalid character " << FrNmAr[i] << " ,please try again! Press any key to exit" << endl;
-				while (true) {
-					if (_kbhit()) {
-						LOG << "Session Failed" << endl;
-						LOG.close();
-						return EXIT_FAILURE;
-					}
-				}
+				cout << "Invalid character " << FrNmAr[i] << " ,please try again!" << endl;
+				LOG << "Session Failed" << endl;
+				LOG.close();
+				return EXIT_FAILURE;
 			}
 		}
 		FrNmVal += (tmp % 9) + 1; // for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
@@ -96,14 +91,10 @@ int main() {
 		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
 			tmp = CAPalphabet.find(LstNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
 			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
-				cout << "Invalid character " << LstNmAr[i] << " ,please try again! Press any key to exit" << endl;
-				while (true) {
-					if (_kbhit()) {
-						LOG << "Session Failed" << endl;
-						LOG.close();
-						return EXIT_FAILURE;
-					}
-				}
+				cout << "Invalid character " << LstNmAr[i] << " ,please try again!" << endl;
+				LOG << "Session Failed" << endl;
+				LOG.close();
+				return EXIT_FAILURE;
 			}
 		}
 		LstNmVal += (tmp % 9) + 1; // for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
@@ -216,15 +207,7 @@ int main() {
 			cout << "Number: " << LuckyNumber << " Meaning: " << lucky9 << endl;
 	}
 
-	cout << "Press any key to exit" << endl;
-	while (true) {
-		if (_kbhit()) {
-			LOG << "Session succeeded" << endl;
-			LOG.close();
-			return EXIT_SUCCESS;
-		}
-	}
-	
+	LOG << "Session succeeded" << endl;
 	LOG.close();
 	return 0;
 }
