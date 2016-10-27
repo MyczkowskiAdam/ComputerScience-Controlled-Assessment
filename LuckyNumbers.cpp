@@ -13,7 +13,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 2.1
+// Version     : 2.2
 // Description : Lucky number calculator
 //============================================================================
 
@@ -31,7 +31,7 @@
 #include <fstream>
 using namespace std;
 
-// VARIABLES USED
+/* VARIABLES USED */
 string lucky1 = "Natural leader";
 string lucky2 = "Natural peacemaker";
 string lucky3 = "Creative and optimistic";
@@ -46,9 +46,22 @@ string alphabet =  "abcdefghijklmnopqrstuvwxyz"; //Letters of alphabet used thro
 string CAPalphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //Capital letters of alphabet used throughout the program
 
 int FrNmVal = 0; //Total value of First Name converted from letter to number values
+int MidNmVal = 0; //Total value of Middle Name converted from letter to number values
 int LstNmVal = 0; //Total value of Last Name converted from letter to number values
-int tmp;
+int tmp = 0;
+bool HasMidName;
+int MAX_LIMIT = 10;
+int c_FrNmVal, c_LstNmVal, c_MidNmVal, dig1, dig2, dig3, MID, LuckyNumber;
+
+string FrNm;
+string MidNm;
+string LstNm;
+
 ofstream LOG;
+
+#define KEY_Y 121
+#define KEY_N 110
+/* END VARIABLES LIST*/
 
 //main prog
 int main() {
@@ -58,7 +71,6 @@ int main() {
 	cout << "Hi there! This program is here to calculate your lucky number and give you its meaning!! Please follow the instructions to find out what our lucky number is! :)" << endl;
 
 	cout << "Enter FIRST name here >> " << flush;
-	string FrNm;
 	cin >> FrNm;
 	LOG << "First name: " << FrNm << endl;
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into array of chars
@@ -83,10 +95,60 @@ int main() {
 		LOG << i + 1 << ". " << FrNmVal << endl;
 	}
 	LOG << "Total is " << FrNmVal << endl; //My name (adam) should be 1 + 4 + 1 + 4 = 10, lets see...
+	
+	//what if someone has middle name??
+	cout << "Do you have a middle name?? (y)es/(n)o" << endl;
+	MID = _getch();
+	while (MID != KEY_Y && MID != KEY_N) {
+		if ( MAX_LIMIT <= 0) {
+			cout << "You have pressed wrong button 10 times, application will be closed now. Press any key to exit" << endl;
+			while (true) {
+				if (_kbhit()) {
+					LOG << "Session Failed" << endl;
+					LOG.close();
+					return EXIT_FAILURE;
+				}
+			}
+		}
+		cout << "Wrong key pressed, press (y) for yes and (n) for no!" << endl;
+		MID = _getch();
+		MAX_LIMIT--;
+	}
+	if (MID == KEY_Y) {
+		HasMidName = true;
+	}
+	if (MID == KEY_N) {
+		HasMidName = false;
+	}
+	if (HasMidName == true ) {
+		cout << "Enter MIDDLE name here >> " << flush;
+		cin >> MidNm;
+		LOG << "Last Name: " << MidNm << endl;
+		char *MidNmAr = const_cast<char*>(MidNm.c_str()); // converts a string into array of chars
 
-
+		for (unsigned int i = 0; i<MidNm.length(); i++) { // check each char in array if its equal to chars from alphabet array and add value associated to that char to FrNmVal integer
+			tmp = alphabet.find(MidNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+				tmp = CAPalphabet.find(MidNmAr[i]); //function that returns the position of a character it loops through from a alphabet character
+				if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+					cout << "Invalid character " << MidNmAr[i] << " ,please try again! Press any key to exit" << endl;
+					while (true) {
+						if (_kbhit()) {
+							LOG << "Session Failed" << endl;
+							LOG.close();
+							return EXIT_SUCCESS;
+						}
+					}
+				}
+			}
+			MidNmVal += (tmp % 9) + 1; // for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
+									   //Staging - check if the value is being add up correctly
+			LOG << i + 1 << ". " << MidNmVal << endl;
+		}
+		LOG << "Total is " << MidNmVal << endl; //My middle name (filip) should be 6 + 9 + 3 + 9 + 7 = 34, lets see...
+	}
+	
 	cout << "Enter LAST name here >> " << flush;
-	string LstNm;
 	cin >> LstNm;
 	LOG << "Last Name: " << LstNm << endl;
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into array of chars
@@ -112,15 +174,15 @@ int main() {
 	}
 	LOG << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
-
-	int c_FrNmVal = FrNmVal;
-	int c_LstNmVal = LstNmVal;
+	c_FrNmVal = FrNmVal;
+	c_LstNmVal = LstNmVal;
+	c_MidNmVal = MidNmVal;
 
 	while (c_FrNmVal > 9) { //split integer into digits
-		int dig1 = (c_FrNmVal / 10) % 10;
-		int dig2 = c_FrNmVal % 10;
+		dig1 = (c_FrNmVal / 10) % 10;
+		dig2 = c_FrNmVal % 10;
 		if (c_FrNmVal > 99) {
-			int dig3 = (c_FrNmVal / 100) % 10;
+			dig3 = (c_FrNmVal / 100) % 10;
 			c_FrNmVal = dig1 + dig2 + dig3;
 			LOG << "Dig1 is: " << dig3 << " , " << flush;
 			LOG << "Dig2 is: " << dig1 << " , " << flush;
@@ -138,12 +200,37 @@ int main() {
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
 	LOG << "First name digit: " << c_FrNmVal << endl; //Check if it returns right integer (enable to debug)
+	
+	if (HasMidName == true) {
+		while (c_MidNmVal > 9) { //split integer into digits
+			dig1 = (c_MidNmVal / 10) % 10;
+			dig2 = c_MidNmVal % 10;
+			if (c_MidNmVal > 99) {
+				dig3 = (c_MidNmVal / 100) % 10;
+				c_MidNmVal = dig1 + dig2 + dig3;
+				LOG << "Dig1 is: " << dig3 << " , " << flush;
+				LOG << "Dig2 is: " << dig1 << " , " << flush;
+				LOG << "Dig3 is: " << dig2 << " , " << flush;
+				// dig3 is actually the farest number to to left when 3-digit number is called,
+				// changing int names would introduce too much mess to the program hence
+				// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
+			}
+			else {
+				c_MidNmVal = dig1 + dig2;
+				LOG << "Dig1 is: " << dig1 << " , " << flush;
+				LOG << "Dig2 is: " << dig2 << " , " << flush;
+			}
+			//cout << dig1 << endl; //Check if it returns right digit (enable to debug)
+			//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
+		}
+		LOG << "Middle name digit: " << c_MidNmVal << endl; //Check if it returns right integer (enable to debug) 
+	}
 
 	while (c_LstNmVal > 9) { //split integer into digits
-		int dig1 = (c_LstNmVal / 10) % 10;
-		int dig2 = c_LstNmVal % 10;
+		dig1 = (c_LstNmVal / 10) % 10;
+		dig2 = c_LstNmVal % 10;
 		if (c_LstNmVal > 99) {
-			int dig3 = (c_LstNmVal / 100) % 10;
+			dig3 = (c_LstNmVal / 100) % 10;
 			c_LstNmVal = dig1 + dig2 + dig3;
 			LOG << "Dig1 is: " << dig3 << " , " << flush;
 			LOG << "Dig2 is: " << dig1 << " , " << flush;
@@ -162,7 +249,12 @@ int main() {
 	}
 	LOG << "Last name digit: " << c_LstNmVal << endl; //Check if it returns right integer (enable to debug)
 
-	int LuckyNumber = c_FrNmVal + c_LstNmVal;
+	if (HasMidName == true) {
+		LuckyNumber = c_FrNmVal + c_LstNmVal + c_MidNmVal;
+	}
+	else {
+		LuckyNumber = c_FrNmVal + c_LstNmVal;
+	}
 
 	while (LuckyNumber > 9) { //split integer into digits
 		int dig1 = (LuckyNumber / 10) % 10;
@@ -186,7 +278,12 @@ int main() {
 		//cout << dig2 << endl; //Check if it returns right digit (enable to debug)
 	}
 	LOG << "Your lucky number is: " << LuckyNumber << endl; //Check if it returns right integer (enable to debug)
-	cout << "Okay then " << FrNm << " " << LstNm << endl;
+	if (HasMidName == true) {
+		cout << "Okay then " << FrNm << " " << MidNm << " " << LstNm << endl;
+	}
+	else {
+		cout << "Okay then " << FrNm << " " << LstNm << endl;
+	}
 	cout << "Your lucky number is " << LuckyNumber << "!! What does it tell about about you? What is its meaning?" << endl;
 	if ( LuckyNumber == 1) {
 		cout << "Number: " << LuckyNumber << " Meaning: " << lucky1 << endl;
