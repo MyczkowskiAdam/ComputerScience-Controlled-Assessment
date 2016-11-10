@@ -13,7 +13,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 2.3
+// Version     : 2.4
 // Description : Lucky number calculator
 //============================================================================
 
@@ -51,11 +51,9 @@ int LstNmVal = 0; //Total value of Last Name converted from letter to number val
 int tmp = 0;
 bool HasMidName;
 int MAX_LIMIT = 10;
-int c_FrNmVal, c_LstNmVal, c_MidNmVal, dig1, dig2, dig3, MID, LuckyNumber;
+int dig1, dig2, dig3, MID, LuckyNumber;
 
-string FrNm;
-string MidNm;
-string LstNm;
+string FrNm, MidNm, LstNm;
 
 ofstream LOG;
 
@@ -116,7 +114,7 @@ int main() {
 	if (MID == KEY_Y) {
 		HasMidName = true;
 	}
-	if (MID == KEY_N) {
+	else if (MID == KEY_N) {
 		HasMidName = false;
 	}
 	if (HasMidName == true) { // Execute only if user choose option to use middle name
@@ -169,20 +167,14 @@ int main() {
 		LstNmVal += (tmp % 9) + 1; // Use simple mathematical equation to change the tmp int into a right number as in the cheatsheet, for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
 		LOG << i + 1 << ". " << LstNmVal << endl;
 	}
-	LOG << "Total is " << LstNmVal << endl; //My surname (myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
+	LOG << "Total is " << LstNmVal << endl; //My surname (Myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
-	c_FrNmVal = FrNmVal; // A copy of FrNmVal
-	c_LstNmVal = LstNmVal; // A copy of LstNmVal
-	if (HasMidName == true) { // Set it only if user has a middle name, otherwise it will cause a leak in memory and possible crash because MidNmVal does not exist. We do not want it to happen.
-		c_MidNmVal = MidNmVal; // A copy of MuidNmVal
-	}
-
-	while (c_FrNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		dig1 = (c_FrNmVal / 10) % 10;
-		dig2 = c_FrNmVal % 10;
-		if (c_FrNmVal > 99) {
-			dig3 = (c_FrNmVal / 100) % 10;
-			c_FrNmVal = dig1 + dig2 + dig3;
+	while (FrNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
+		dig1 = (FrNmVal / 10) % 10;
+		dig2 = FrNmVal % 10;
+		if (FrNmVal > 99) {
+			dig3 = (FrNmVal / 100) % 10;
+			FrNmVal = dig1 + dig2 + dig3;
 			LOG << "Dig1 is: " << dig3 << " , " << flush;
 			LOG << "Dig2 is: " << dig1 << " , " << flush;
 			LOG << "Dig3 is: " << dig2 << " , " << flush;
@@ -191,20 +183,20 @@ int main() {
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			c_FrNmVal = dig1 + dig2;
+			FrNmVal = dig1 + dig2;
 			LOG << "Dig1 is: " << dig1 << " , " << flush;
 			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
-	LOG << "First name digit: " << c_FrNmVal << endl;
+	LOG << "First name digit: " << FrNmVal << endl;
 	
 	if (HasMidName == true) {
-		while (c_MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-			dig1 = (c_MidNmVal / 10) % 10;
-			dig2 = c_MidNmVal % 10;
-			if (c_MidNmVal > 99) {
-				dig3 = (c_MidNmVal / 100) % 10;
-				c_MidNmVal = dig1 + dig2 + dig3;
+		while (MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
+			dig1 = (MidNmVal / 10) % 10;
+			dig2 = MidNmVal % 10;
+			if (MidNmVal > 99) {
+				dig3 = (MidNmVal / 100) % 10;
+				MidNmVal = dig1 + dig2 + dig3;
 				LOG << "Dig1 is: " << dig3 << " , " << flush;
 				LOG << "Dig2 is: " << dig1 << " , " << flush;
 				LOG << "Dig3 is: " << dig2 << " , " << flush;
@@ -213,20 +205,20 @@ int main() {
 				// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 			}
 			else {
-				c_MidNmVal = dig1 + dig2;
+				MidNmVal = dig1 + dig2;
 				LOG << "Dig1 is: " << dig1 << " , " << flush;
 				LOG << "Dig2 is: " << dig2 << " , " << flush;
 			}
 		}
-		LOG << "Middle name digit: " << c_MidNmVal << endl;
+		LOG << "Middle name digit: " << MidNmVal << endl;
 	}
 
-	while (c_LstNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		dig1 = (c_LstNmVal / 10) % 10;
-		dig2 = c_LstNmVal % 10;
-		if (c_LstNmVal > 99) {
-			dig3 = (c_LstNmVal / 100) % 10;
-			c_LstNmVal = dig1 + dig2 + dig3;
+	while (LstNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
+		dig1 = (LstNmVal / 10) % 10;
+		dig2 = LstNmVal % 10;
+		if (LstNmVal > 99) {
+			dig3 = (LstNmVal / 100) % 10;
+			LstNmVal = dig1 + dig2 + dig3;
 			LOG << "Dig1 is: " << dig3 << " , " << flush;
 			LOG << "Dig2 is: " << dig1 << " , " << flush;
 			LOG << "Dig3 is: " << dig2 << " , " << flush;
@@ -235,18 +227,18 @@ int main() {
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			c_LstNmVal = dig1 + dig2;
+			LstNmVal = dig1 + dig2;
 			LOG << "Dig1 is: " << dig1 << " , " << flush;
 			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
-	LOG << "Last name digit: " << c_LstNmVal << endl;
+	LOG << "Last name digit: " << LstNmVal << endl;
 
 	if (HasMidName == true) { // We want to add MidNmVal only if user name has chosen to do so.
-		LuckyNumber = c_FrNmVal + c_LstNmVal + c_MidNmVal;
+		LuckyNumber = FrNmVal + LstNmVal + MidNmVal;
 	}
 	else {
-		LuckyNumber = c_FrNmVal + c_LstNmVal;
+		LuckyNumber = FrNmVal + LstNmVal;
 	}
 
 	while (LuckyNumber > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
