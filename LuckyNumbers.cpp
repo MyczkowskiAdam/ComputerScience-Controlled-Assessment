@@ -59,12 +59,28 @@ ofstream LOG;
 
 #define KEY_Y 121 // ASCII value for 'y' key
 #define KEY_N 110 // ASCII value for 'n' key
+
+typedef BOOL DLLSearchFunc(LPCTSTR, LPSTR, DWORD);
+HINSTANCE hDLLSearch = 0;
 /* END VARIABLES LIST*/
+
+BOOL LoadDLL() {
+	hDLLSearch = LoadLibrary("msvcp140.dll");
+	if (hDLLSearch == NULL) {
+		MessageBox(NULL, "Unable to load MSCVP140 library", "Error", MB_OK | MB_ICONERROR);
+		return EXIT_FAILURE;
+	}
+}
+void UnloadDLL() {
+	FreeLibrary(hDLLSearch);
+}
 
 //main prog
 int main() {
 
+	LoadDLL();
 	LOG.open("LOG.txt", ios::app);
+	LOG << hDLLSearch << endl;
 
 	cout << "Hi there! This program is here to calculate your lucky number and give you its meaning!! Please follow the instructions to find out what our lucky number is! :)" << endl;
 
@@ -83,6 +99,7 @@ int main() {
 					if (_kbhit()) { // Terminate the program if any key is pressed
 						LOG << "Session Failed" << endl;
 						LOG.close();
+						UnloadDLL();
 						return EXIT_FAILURE;
 					}
 				}
@@ -103,6 +120,7 @@ int main() {
 				if (_kbhit()) { // Terminate the program if any key is pressed
 					LOG << "Session Failed" << endl; 
 					LOG.close();
+					UnloadDLL();
 					return EXIT_FAILURE;
 				}
 			}
@@ -133,6 +151,7 @@ int main() {
 						if (_kbhit()) { // Terminate the program if any key is pressed
 							LOG << "Session Failed" << endl;
 							LOG.close();
+							UnloadDLL();
 							return EXIT_SUCCESS;
 						}
 					}
@@ -159,6 +178,7 @@ int main() {
 					if (_kbhit()) { // Terminate the program if any key is pressed
 						LOG << "Session Failed" << endl;
 						LOG.close();
+						UnloadDLL();
 						return EXIT_FAILURE;
 					}
 				}
@@ -301,6 +321,7 @@ int main() {
 		if (_kbhit()) {
 			LOG << "Session succeeded" << endl;
 			LOG.close();
+			UnloadDLL();
 			return EXIT_SUCCESS;
 		}
 	}
