@@ -304,7 +304,4 @@ int main() {
 			return EXIT_SUCCESS;
 		}
 	}
-	
-	LOG.close();
-	return 0;
 }
