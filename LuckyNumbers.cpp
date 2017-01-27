@@ -32,15 +32,17 @@
 using namespace std;
 
 /* VARIABLES USED */
-string lucky1 = "are a natural leader";
-string lucky2 = "are a natural peacemaker";
-string lucky3 = "are creative and optimistic";
-string lucky4 = "are a hard worker";
-string lucky5 = "value freedom";
-string lucky6 = "are a carer and provider";
-string lucky7 = "are a thinker";
-string lucky8 = "have diplomatic skills";
-string lucky9 = "are selfless and generous";
+string lucky[] = { 
+	"are a natural leader",
+	"are a natural peacemaker",
+	"are creative and optimistic",
+	"are a hard worker",
+	"value freedom",
+	"are a carer and provider",
+	"are a thinker",
+	"have diplomatic skills",
+	"are selfless and generous" 
+};
 
 string alphabet = "abcdefghijklmnopqrstuvwxyz"; //Letters of alphabet used throughout the program
 string CAPalphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //Capital letters of alphabet used throughout the program
@@ -266,31 +268,31 @@ int main() {
 	}
 	cout << "Your lucky number is " << LuckyNumber << "!! This means that you " << flush;
 	if (LuckyNumber == 1) {
-		cout << lucky1 << endl;
+		cout << lucky[0] << endl;
 	}
 	else if (LuckyNumber == 2) {
-		cout << lucky2 << endl;
+		cout << lucky[1] << endl;
 	}
 	else if (LuckyNumber == 3) {
-		cout << lucky3 << endl;
+		cout << lucky[2] << endl;
 	}
 	else if (LuckyNumber == 4) {
-		cout << lucky4 << endl;
+		cout << lucky[3] << endl;
 	}
 	else if (LuckyNumber == 5) {
-		cout << lucky5 << endl;
+		cout << lucky[4] << endl;
 	}
 	else if (LuckyNumber == 6) {
-		cout << lucky6 << endl;
+		cout << lucky[5] << endl;
 	}
 	else if (LuckyNumber == 7) {
-		cout << lucky7 << endl;
+		cout << lucky[6] << endl;
 	}
 	else if (LuckyNumber == 8) {
-		cout << lucky8 << endl;
+		cout << lucky[7] << endl;
 	}
 	else if (LuckyNumber == 9) {
-		cout << lucky9 << endl;
+		cout << lucky[8] << endl;
 	}
 
 	cout << "Press any key to exit . . ." << endl;
