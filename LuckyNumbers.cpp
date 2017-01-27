@@ -51,9 +51,10 @@ int LstNmVal = 0; //Total value of Last Name converted from letter to number val
 int tmp = 0;
 bool HasMidName;
 int MAX_LIMIT = 10;
-int dig1, dig2, dig3, MID, LuckyNumber;
+int MID, LuckyNumber;
 
-string FrNm, MidNm, LstNm;
+string FrNm, MidNm, LstNm, FrNmValS, MidNmValS, LstNmValS, LuckyNumberS;
+char *FrNmValAr, *MidNmValAr, *LstNmValAr, *LuckyNumberAr;
 
 ofstream LOG;
 
@@ -170,67 +171,63 @@ int main() {
 	LOG << "Total is " << LstNmVal << endl; //My surname (Myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
 	while (FrNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		dig1 = (FrNmVal / 10) % 10;
-		dig2 = FrNmVal % 10;
+		FrNmValS = to_string(FrNmVal);
+		FrNmValAr = const_cast<char*>(FrNmValS.c_str());
 		if (FrNmVal > 99) {
-			dig3 = (FrNmVal / 100) % 10;
-			FrNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			FrNmVal = (FrNmValAr[0] - '0') + (FrNmValAr[1] - '0') + (FrNmValAr[2] + '0');
+			LOG << "Dig1 is: " << FrNmValAr[2] << " , " << flush;
+			LOG << "Dig2 is: " << FrNmValAr[0] << " , " << flush;
+			LOG << "Dig3 is: " << FrNmValAr[1] << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			FrNmVal = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
+			FrNmVal = (FrNmValAr[0] - '0') + (FrNmValAr[1] - '0');
+			LOG << "Dig1 is: " << FrNmValAr[0] << " , " << flush;
+			LOG << "Dig2 is: " << FrNmValAr[1] << " , " << flush;
 		}
 	}
 	LOG << "First name digit: " << FrNmVal << endl;
 	
 	if (HasMidName == true) {
 		while (MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-			dig1 = (MidNmVal / 10) % 10;
-			dig2 = MidNmVal % 10;
+			MidNmValS = to_string(MidNmVal);
+			MidNmValAr = const_cast<char*>(MidNmValS.c_str());
 			if (MidNmVal > 99) {
-				dig3 = (MidNmVal / 100) % 10;
-				MidNmVal = dig1 + dig2 + dig3;
-				LOG << "Dig1 is: " << dig3 << " , " << flush;
-				LOG << "Dig2 is: " << dig1 << " , " << flush;
-				LOG << "Dig3 is: " << dig2 << " , " << flush;
+				MidNmVal = (MidNmValAr[0] - '0') + (MidNmValAr[1] - '0') + (MidNmValAr[2] + '0');
+				LOG << "Dig1 is: " << MidNmValAr[2] << " , " << flush;
+				LOG << "Dig2 is: " << MidNmValAr[0] << " , " << flush;
+				LOG << "Dig3 is: " << MidNmValAr[1] << " , " << flush;
 				// dig3 is actually the farest number to to left when 3-digit number is called,
 				// changing int names would introduce too much mess to the program hence
 				// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 			}
 			else {
-				MidNmVal = dig1 + dig2;
-				LOG << "Dig1 is: " << dig1 << " , " << flush;
-				LOG << "Dig2 is: " << dig2 << " , " << flush;
+				MidNmVal = (MidNmValAr[0] - '0') + (MidNmValAr[1] - '0');
+				LOG << "Dig1 is: " << MidNmValAr[0] << " , " << flush;
+				LOG << "Dig2 is: " << MidNmValAr[1] << " , " << flush;
 			}
 		}
 		LOG << "Middle name digit: " << MidNmVal << endl;
 	}
 
 	while (LstNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		dig1 = (LstNmVal / 10) % 10;
-		dig2 = LstNmVal % 10;
+		LstNmValS = to_string(LstNmVal);
+		LstNmValAr = const_cast<char*>(LstNmValS.c_str());
 		if (LstNmVal > 99) {
-			dig3 = (LstNmVal / 100) % 10;
-			LstNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			FrNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0') + (LstNmValAr[2] + '0');
+			LOG << "Dig1 is: " << LstNmValAr[2] << " , " << flush;
+			LOG << "Dig2 is: " << LstNmValAr[0] << " , " << flush;
+			LOG << "Dig3 is: " << LstNmValAr[1] << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			LstNmVal = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
-		}
+			LstNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0');
+			LOG << "Dig1 is: " << LstNmValAr[0] << " , " << flush;
+			LOG << "Dig2 is: " << LstNmValAr[1] << " , " << flush;
 	}
 	LOG << "Last name digit: " << LstNmVal << endl;
 
@@ -242,24 +239,24 @@ int main() {
 	}
 
 	while (LuckyNumber > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		int dig1 = (LuckyNumber / 10) % 10;
-		int dig2 = LuckyNumber % 10;
+				LuckyNumberS = to_string(LuckyNumber);
+		LuckyNumberAr = const_cast<char*>(LuckyNumberS.c_str());
 		if (LuckyNumber > 99) {
-			int dig3 = (LuckyNumber / 100) % 10;
-			LuckyNumber = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
+			LuckyNumber = (LuckyNumberAr[0] - '0') + (LuckyNumberAr[1] - '0') + (LuckyNumberAr[2] + '0');
+			LOG << "Dig1 is: " << LuckyNumberAr[2] << " , " << flush;
+			LOG << "Dig2 is: " << LuckyNumberAr[0] << " , " << flush;
+			LOG << "Dig3 is: " << LuckyNumberAr[1] << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			LuckyNumber = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
+			LuckyNumber = (LuckyNumberAr[0] - '0') + (LuckyNumberAr[1] - '0');
+			LOG << "Dig1 is: " << LuckyNumberAr[0] << " , " << flush;
+			LOG << "Dig2 is: " << LuckyNumberAr[1] << " , " << flush;
 		}
 	}
+	
 	LOG << "Your lucky number is: " << LuckyNumber << endl;
 	if (HasMidName == true) { // We want to display middle name only if user has it.
 		cout << "Okay then " << FrNm << " " << MidNm << " " << LstNm << endl;
