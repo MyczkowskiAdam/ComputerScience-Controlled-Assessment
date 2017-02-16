@@ -32,7 +32,7 @@
 using namespace std;
 
 /* VARIABLES USED */
-string lucky[] = { 
+string lucky[] = {
 	"are a natural leader",
 	"are a natural peacemaker",
 	"are creative and optimistic",
@@ -41,7 +41,7 @@ string lucky[] = {
 	"are a carer and provider",
 	"are a thinker",
 	"have diplomatic skills",
-	"are selfless and generous" 
+	"are selfless and generous"
 };
 
 string alphabet = "abcdefghijklmnopqrstuvwxyz"; //Letters of alphabet used throughout the program
@@ -95,8 +95,8 @@ int main() {
 		LOG << i + 1 << ". " << FrNmVal << endl;
 	}
 	LOG << "Total is " << FrNmVal << endl; //My name (Adam) should be 1 + 4 + 1 + 4 = 10, lets see...
-	
-	// What if someone has middle name??
+
+										   // What if someone has middle name??
 	cout << "Do you have a middle name?? (y)es/(n)o" << endl;
 	MID = _getch(); // getch is a function from conio.h that is able to detect what key have you pressed on keyboard, you can use it with keys' ASCII and Hex values
 	while (MID != KEY_Y && MID != KEY_N) {
@@ -104,7 +104,7 @@ int main() {
 			cout << "You have pressed wrong button 10 times, application will be closed now. Press any key to exit . . ." << endl;
 			while (true) {
 				if (_kbhit()) { // Terminate the program if any key is pressed
-					LOG << "Session Failed" << endl; 
+					LOG << "Session Failed" << endl;
 					LOG.close();
 					return EXIT_FAILURE;
 				}
@@ -146,7 +146,7 @@ int main() {
 		}
 		LOG << "Total is " << MidNmVal << endl; //My middle name (Filip) should be 6 + 9 + 3 + 9 + 7 = 34, lets see...
 	}
-	
+
 	cout << "Enter LAST name here >> " << flush;
 	cin >> LstNm;
 	LOG << "Last Name: " << LstNm << endl;
@@ -191,7 +191,7 @@ int main() {
 		}
 	}
 	LOG << "First name digit: " << FrNmVal << endl;
-	
+
 	if (HasMidName == true) {
 		while (MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
 			MidNmValS = to_string(MidNmVal);
@@ -230,6 +230,7 @@ int main() {
 			LstNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0');
 			LOG << "Dig1 is: " << LstNmValAr[0] << " , " << flush;
 			LOG << "Dig2 is: " << LstNmValAr[1] << " , " << flush;
+		}
 	}
 	LOG << "Last name digit: " << LstNmVal << endl;
 
@@ -241,7 +242,7 @@ int main() {
 	}
 
 	while (LuckyNumber > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-				LuckyNumberS = to_string(LuckyNumber);
+		LuckyNumberS = to_string(LuckyNumber);
 		LuckyNumberAr = const_cast<char*>(LuckyNumberS.c_str());
 		if (LuckyNumber > 99) {
 			LuckyNumber = (LuckyNumberAr[0] - '0') + (LuckyNumberAr[1] - '0') + (LuckyNumberAr[2] + '0');
@@ -258,7 +259,7 @@ int main() {
 			LOG << "Dig2 is: " << LuckyNumberAr[1] << " , " << flush;
 		}
 	}
-	
+
 	LOG << "Your lucky number is: " << LuckyNumber << endl;
 	if (HasMidName == true) { // We want to display middle name only if user has it.
 		cout << "Okay then " << FrNm << " " << MidNm << " " << LstNm << endl;
@@ -266,34 +267,7 @@ int main() {
 	else {
 		cout << "Okay then " << FrNm << " " << LstNm << endl;
 	}
-	cout << "Your lucky number is " << LuckyNumber << "!! This means that you " << flush;
-	if (LuckyNumber == 1) {
-		cout << lucky[0] << endl;
-	}
-	else if (LuckyNumber == 2) {
-		cout << lucky[1] << endl;
-	}
-	else if (LuckyNumber == 3) {
-		cout << lucky[2] << endl;
-	}
-	else if (LuckyNumber == 4) {
-		cout << lucky[3] << endl;
-	}
-	else if (LuckyNumber == 5) {
-		cout << lucky[4] << endl;
-	}
-	else if (LuckyNumber == 6) {
-		cout << lucky[5] << endl;
-	}
-	else if (LuckyNumber == 7) {
-		cout << lucky[6] << endl;
-	}
-	else if (LuckyNumber == 8) {
-		cout << lucky[7] << endl;
-	}
-	else if (LuckyNumber == 9) {
-		cout << lucky[8] << endl;
-	}
+	cout << "Your lucky number is " << LuckyNumber << "!! This means that you " << lucky[LuckyNumber - 1] << endl;
 
 	cout << "Press any key to exit . . ." << endl;
 	while (true) {
