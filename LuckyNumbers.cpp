@@ -53,10 +53,9 @@ int LstNmVal = 0; //Total value of Last Name converted from letter to number val
 int tmp = 0;
 bool HasMidName;
 int MAX_LIMIT = 10;
-int MID, LuckyNumber;
+int dig1, dig2, dig3, MID, LuckyNumber;
 
-string FrNm, MidNm, LstNm, FrNmValS, MidNmValS, LstNmValS, LuckyNumberS;
-char *FrNmValAr, *MidNmValAr, *LstNmValAr, *LuckyNumberAr;
+string FrNm, MidNm, LstNm;
 
 ofstream LOG;
 
@@ -74,13 +73,13 @@ int main() {
 	cout << "Enter FIRST name here >> " << flush;
 	cin >> FrNm;
 	LOG << "First name: " << FrNm << endl;
-	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into char* (pointer to a char, basically a char array) 
+	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 	for (unsigned int i = 0; i<FrNm.length(); i++) {
-		tmp = alphabet.find(FrNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer  
-		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+		tmp = alphabet.find(FrNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer
+		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
 			tmp = CAPalphabet.find(FrNmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer
-			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
 				cout << "Invalid character " << FrNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 				while (true) {
 					if (_kbhit()) { // Terminate the program if any key is pressed
@@ -127,10 +126,10 @@ int main() {
 		char *MidNmAr = const_cast<char*>(MidNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 		for (unsigned int i = 0; i<MidNm.length(); i++) {
-			tmp = alphabet.find(MidNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer 
-			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
-				tmp = CAPalphabet.find(MidNmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer 
-				if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+			tmp = alphabet.find(MidNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
+				tmp = CAPalphabet.find(MidNmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer
+				if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
 					cout << "Invalid character " << MidNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 					while (true) {
 						if (_kbhit()) { // Terminate the program if any key is pressed
@@ -153,10 +152,10 @@ int main() {
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 	for (unsigned int i = 0; i<LstNm.length(); i++) {
-		tmp = alphabet.find(LstNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer 
-		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
-			tmp = CAPalphabet.find(LstNmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer 
-			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position) 
+		tmp = alphabet.find(LstNmAr[i]); // This function takes a char from char*, tries to find it in the alphabet string, returns its positiion as a integer and writes results to tmp integer
+		if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
+			tmp = CAPalphabet.find(LstNmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer
+			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
 				cout << "Invalid character " << LstNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 				while (true) {
 					if (_kbhit()) { // Terminate the program if any key is pressed
@@ -173,63 +172,67 @@ int main() {
 	LOG << "Total is " << LstNmVal << endl; //My surname (Myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
 	while (FrNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		FrNmValS = to_string(FrNmVal);
-		FrNmValAr = const_cast<char*>(FrNmValS.c_str());
+		dig1 = (FrNmVal / 10) % 10;
+		dig2 = FrNmVal % 10;
 		if (FrNmVal > 99) {
-			FrNmVal = (FrNmValAr[0] - '0') + (FrNmValAr[1] - '0') + (FrNmValAr[2] + '0');
-			LOG << "Dig1 is: " << FrNmValAr[2] << " , " << flush;
-			LOG << "Dig2 is: " << FrNmValAr[0] << " , " << flush;
-			LOG << "Dig3 is: " << FrNmValAr[1] << " , " << flush;
+			dig3 = (FrNmVal / 100) % 10;
+			FrNmVal = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			FrNmVal = (FrNmValAr[0] - '0') + (FrNmValAr[1] - '0');
-			LOG << "Dig1 is: " << FrNmValAr[0] << " , " << flush;
-			LOG << "Dig2 is: " << FrNmValAr[1] << " , " << flush;
+			FrNmVal = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
 	LOG << "First name digit: " << FrNmVal << endl;
 
 	if (HasMidName == true) {
 		while (MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-			MidNmValS = to_string(MidNmVal);
-			MidNmValAr = const_cast<char*>(MidNmValS.c_str());
+			dig1 = (MidNmVal / 10) % 10;
+			dig2 = MidNmVal % 10;
 			if (MidNmVal > 99) {
-				MidNmVal = (MidNmValAr[0] - '0') + (MidNmValAr[1] - '0') + (MidNmValAr[2] + '0');
-				LOG << "Dig1 is: " << MidNmValAr[2] << " , " << flush;
-				LOG << "Dig2 is: " << MidNmValAr[0] << " , " << flush;
-				LOG << "Dig3 is: " << MidNmValAr[1] << " , " << flush;
+				dig3 = (MidNmVal / 100) % 10;
+				MidNmVal = dig1 + dig2 + dig3;
+				LOG << "Dig1 is: " << dig3 << " , " << flush;
+				LOG << "Dig2 is: " << dig1 << " , " << flush;
+				LOG << "Dig3 is: " << dig2 << " , " << flush;
 				// dig3 is actually the farest number to to left when 3-digit number is called,
 				// changing int names would introduce too much mess to the program hence
 				// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 			}
 			else {
-				MidNmVal = (MidNmValAr[0] - '0') + (MidNmValAr[1] - '0');
-				LOG << "Dig1 is: " << MidNmValAr[0] << " , " << flush;
-				LOG << "Dig2 is: " << MidNmValAr[1] << " , " << flush;
+				MidNmVal = dig1 + dig2;
+				LOG << "Dig1 is: " << dig1 << " , " << flush;
+				LOG << "Dig2 is: " << dig2 << " , " << flush;
 			}
 		}
 		LOG << "Middle name digit: " << MidNmVal << endl;
 	}
 
 	while (LstNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		LstNmValS = to_string(LstNmVal);
-		LstNmValAr = const_cast<char*>(LstNmValS.c_str());
+		dig1 = (LstNmVal / 10) % 10;
+		dig2 = LstNmVal % 10;
 		if (LstNmVal > 99) {
-			FrNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0') + (LstNmValAr[2] + '0');
-			LOG << "Dig1 is: " << LstNmValAr[2] << " , " << flush;
-			LOG << "Dig2 is: " << LstNmValAr[0] << " , " << flush;
-			LOG << "Dig3 is: " << LstNmValAr[1] << " , " << flush;
+			dig3 = (LstNmVal / 100) % 10;
+			LstNmVal = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			LstNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0');
-			LOG << "Dig1 is: " << LstNmValAr[0] << " , " << flush;
-			LOG << "Dig2 is: " << LstNmValAr[1] << " , " << flush;
+			LstNmVal = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
 	LOG << "Last name digit: " << LstNmVal << endl;
@@ -242,21 +245,22 @@ int main() {
 	}
 
 	while (LuckyNumber > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
-		LuckyNumberS = to_string(LuckyNumber);
-		LuckyNumberAr = const_cast<char*>(LuckyNumberS.c_str());
+		int dig1 = (LuckyNumber / 10) % 10;
+		int dig2 = LuckyNumber % 10;
 		if (LuckyNumber > 99) {
-			LuckyNumber = (LuckyNumberAr[0] - '0') + (LuckyNumberAr[1] - '0') + (LuckyNumberAr[2] + '0');
-			LOG << "Dig1 is: " << LuckyNumberAr[2] << " , " << flush;
-			LOG << "Dig2 is: " << LuckyNumberAr[0] << " , " << flush;
-			LOG << "Dig3 is: " << LuckyNumberAr[1] << " , " << flush;
+			int dig3 = (LuckyNumber / 100) % 10;
+			LuckyNumber = dig1 + dig2 + dig3;
+			LOG << "Dig1 is: " << dig3 << " , " << flush;
+			LOG << "Dig2 is: " << dig1 << " , " << flush;
+			LOG << "Dig3 is: " << dig2 << " , " << flush;
 			// dig3 is actually the farest number to to left when 3-digit number is called,
 			// changing int names would introduce too much mess to the program hence
 			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			LuckyNumber = (LuckyNumberAr[0] - '0') + (LuckyNumberAr[1] - '0');
-			LOG << "Dig1 is: " << LuckyNumberAr[0] << " , " << flush;
-			LOG << "Dig2 is: " << LuckyNumberAr[1] << " , " << flush;
+			LuckyNumber = dig1 + dig2;
+			LOG << "Dig1 is: " << dig1 << " , " << flush;
+			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
 
