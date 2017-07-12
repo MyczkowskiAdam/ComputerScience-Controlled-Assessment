@@ -57,8 +57,6 @@ int dig1, dig2, dig3, MID, LuckyNumber;
 
 string FrNm, MidNm, LstNm;
 
-ofstream LOG;
-
 #define KEY_Y 121 // ASCII value for 'y' key
 #define KEY_N 110 // ASCII value for 'n' key
 /* END VARIABLES LIST*/
@@ -66,13 +64,10 @@ ofstream LOG;
 //main prog
 int main() {
 
-	LOG.open("LOG.txt", ios::app);
-
 	cout << "Hi there! This program is here to calculate your lucky number and give you its meaning!! Please follow the instructions to find out what our lucky number is! :)" << endl;
 
 	cout << "Enter FIRST name here >> " << flush;
 	cin >> FrNm;
-	LOG << "First name: " << FrNm << endl;
 	char *FrNmAr = const_cast<char*>(FrNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 	for (unsigned int i = 0; i<FrNm.length(); i++) {
@@ -83,17 +78,13 @@ int main() {
 				cout << "Invalid character " << FrNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 				while (true) {
 					if (_kbhit()) { // Terminate the program if any key is pressed
-						LOG << "Session Failed" << endl;
-						LOG.close();
 						return EXIT_FAILURE;
 					}
 				}
 			}
 		}
 		FrNmVal += (tmp % 9) + 1; // Use simple mathematical equation to change the tmp int into a right number as in the cheatsheet, for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
-		LOG << i + 1 << ". " << FrNmVal << endl;
 	}
-	LOG << "Total is " << FrNmVal << endl; //My name (Adam) should be 1 + 4 + 1 + 4 = 10, lets see...
 
 										   // What if someone has middle name??
 	cout << "Do you have a middle name?? (y)es/(n)o" << endl;
@@ -103,8 +94,6 @@ int main() {
 			cout << "You have pressed wrong button 10 times, application will be closed now. Press any key to exit . . ." << endl;
 			while (true) {
 				if (_kbhit()) { // Terminate the program if any key is pressed
-					LOG << "Session Failed" << endl;
-					LOG.close();
 					return EXIT_FAILURE;
 				}
 			}
@@ -122,7 +111,6 @@ int main() {
 	if (HasMidName == true) { // Execute only if user choose option to use middle name
 		cout << "Enter MIDDLE name here >> " << flush;
 		cin >> MidNm;
-		LOG << "Last Name: " << MidNm << endl;
 		char *MidNmAr = const_cast<char*>(MidNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 		for (unsigned int i = 0; i<MidNm.length(); i++) {
@@ -133,22 +121,17 @@ int main() {
 					cout << "Invalid character " << MidNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 					while (true) {
 						if (_kbhit()) { // Terminate the program if any key is pressed
-							LOG << "Session Failed" << endl;
-							LOG.close();
 							return EXIT_SUCCESS;
 						}
 					}
 				}
 			}
 			MidNmVal += (tmp % 9) + 1; // Use simple mathematical equation to change the tmp int into a right number as in the cheatsheet, for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
-			LOG << i + 1 << ". " << MidNmVal << endl;
 		}
-		LOG << "Total is " << MidNmVal << endl; //My middle name (Filip) should be 6 + 9 + 3 + 9 + 7 = 34, lets see...
 	}
 
 	cout << "Enter LAST name here >> " << flush;
 	cin >> LstNm;
-	LOG << "Last Name: " << LstNm << endl;
 	char *LstNmAr = const_cast<char*>(LstNm.c_str()); // converts a string into char* (pointer to a char, basically a char array)
 
 	for (unsigned int i = 0; i<LstNm.length(); i++) {
@@ -159,38 +142,24 @@ int main() {
 				cout << "Invalid character " << LstNmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
 				while (true) {
 					if (_kbhit()) { // Terminate the program if any key is pressed
-						LOG << "Session Failed" << endl;
-						LOG.close();
 						return EXIT_FAILURE;
 					}
 				}
 			}
 		}
 		LstNmVal += (tmp % 9) + 1; // Use simple mathematical equation to change the tmp int into a right number as in the cheatsheet, for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
-		LOG << i + 1 << ". " << LstNmVal << endl;
 	}
-	LOG << "Total is " << LstNmVal << endl; //My surname (Myczkowski) should be 4 + 7 + 3 + 8 + 2 + 6 + 5 + 1 + 2 + 9 = 47, lets see...
 
 	while (FrNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
 		dig1 = (FrNmVal / 10) % 10;
 		dig2 = FrNmVal % 10;
 		if (FrNmVal > 99) {
 			dig3 = (FrNmVal / 100) % 10;
-			FrNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
-			// dig3 is actually the farest number to to left when 3-digit number is called,
-			// changing int names would introduce too much mess to the program hence
-			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			FrNmVal = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
-	LOG << "First name digit: " << FrNmVal << endl;
 
 	if (HasMidName == true) {
 		while (MidNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
@@ -199,20 +168,11 @@ int main() {
 			if (MidNmVal > 99) {
 				dig3 = (MidNmVal / 100) % 10;
 				MidNmVal = dig1 + dig2 + dig3;
-				LOG << "Dig1 is: " << dig3 << " , " << flush;
-				LOG << "Dig2 is: " << dig1 << " , " << flush;
-				LOG << "Dig3 is: " << dig2 << " , " << flush;
-				// dig3 is actually the farest number to to left when 3-digit number is called,
-				// changing int names would introduce too much mess to the program hence
-				// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 			}
 			else {
 				MidNmVal = dig1 + dig2;
-				LOG << "Dig1 is: " << dig1 << " , " << flush;
-				LOG << "Dig2 is: " << dig2 << " , " << flush;
 			}
 		}
-		LOG << "Middle name digit: " << MidNmVal << endl;
 	}
 
 	while (LstNmVal > 9) { // if number is lower than 9 it's a single digit and doesn't need to be split
@@ -221,21 +181,11 @@ int main() {
 		if (LstNmVal > 99) {
 			dig3 = (LstNmVal / 100) % 10;
 			LstNmVal = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
-			// dig3 is actually the farest number to to left when 3-digit number is called,
-			// changing int names would introduce too much mess to the program hence
-			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
-			LstNmVal = (LstNmValAr[0] - '0') + (LstNmValAr[1] - '0');
 			LstNmVal = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
-	LOG << "Last name digit: " << LstNmVal << endl;
 
 	if (HasMidName == true) { // We want to add MidNmVal only if user name has chosen to do so.
 		LuckyNumber = FrNmVal + LstNmVal + MidNmVal;
@@ -250,21 +200,12 @@ int main() {
 		if (LuckyNumber > 99) {
 			int dig3 = (LuckyNumber / 100) % 10;
 			LuckyNumber = dig1 + dig2 + dig3;
-			LOG << "Dig1 is: " << dig3 << " , " << flush;
-			LOG << "Dig2 is: " << dig1 << " , " << flush;
-			LOG << "Dig3 is: " << dig2 << " , " << flush;
-			// dig3 is actually the farest number to to left when 3-digit number is called,
-			// changing int names would introduce too much mess to the program hence
-			// just putting dig3 as dig1 and moving dig1 and dig2 by 1 to the right
 		}
 		else {
 			LuckyNumber = dig1 + dig2;
-			LOG << "Dig1 is: " << dig1 << " , " << flush;
-			LOG << "Dig2 is: " << dig2 << " , " << flush;
 		}
 	}
 
-	LOG << "Your lucky number is: " << LuckyNumber << endl;
 	if (HasMidName == true) { // We want to display middle name only if user has it.
 		cout << "Okay then " << FrNm << " " << MidNm << " " << LstNm << endl;
 	}
@@ -276,8 +217,6 @@ int main() {
 	cout << "Press any key to exit . . ." << endl;
 	while (true) {
 		if (_kbhit()) {
-			LOG << "Session succeeded" << endl;
-			LOG.close();
 			return EXIT_SUCCESS;
 		}
 	}
