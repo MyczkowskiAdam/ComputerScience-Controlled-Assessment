@@ -85,6 +85,7 @@ int splitNumber(int Number) {
 		dig2 = Number % 10;
 		if (Number > 99) {
 			dig3 = (Number / 100) % 10;
+			Number = dig1 + dig2 + dig3;
 		}
 		else {
 			Number = dig1 + dig2;
