@@ -13,7 +13,7 @@
 //============================================================================
 // Name        : LuckyNumbers.cpp
 // Author      : Adam Myczkowski
-// Version     : 2.5
+// Version     : 2.6
 // Description : Lucky number calculator
 //============================================================================
 
@@ -27,8 +27,12 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <conio.h>
 #include <fstream>
+
+#ifdef _WIN32
+#include <conio.h>
+#endif
+
 using namespace std;
 
 /* VARIABLES USED */
@@ -65,11 +69,15 @@ int convert(string Nm) {
 			tmp = CAPalphabet.find(NmAr[i]); // This function takes a char from char*, tries to find it in the CAPalphabet string, returns its positiion as a integer and writes results to tmp integer
 			if (tmp == string::npos) { // npos (-1) is returned when char we looking for is not in a given string (no position)
 				cout << "Invalid character " << NmAr[i] << " ,please try again! Press any key to exit . . ." << endl;
+#ifdef _WIN32
 				while (true) {
 					if (_kbhit()) { // Terminate the program if any key is pressed
 						return EXIT_FAILURE;
 					}
 				}
+#else
+				return EXIT_FAILURE;
+#endif
 			}
 		}
 		NmVal += (tmp % 9) + 1; // Use simple mathematical equation to change the tmp int into a right number as in the cheatsheet, for example 'c' is in pos 2, 2 % 9 = 2 because 2 / 9 = 0.(2), 2 + 1 = 3. ^Lookup cheatsheet: c = 3.
@@ -106,6 +114,7 @@ int main() {
 
 	// What if someone has middle name??
 	cout << "Do you have a middle name?? (y)es/(n)o" << endl;
+#ifdef _WIN32
 	keyInput = _getch(); // getch is a function from conio.h that is able to detect what key have you pressed on keyboard, you can use it with keys' ASCII and Hex values
 	while (keyInput != KEY_Y && keyInput != KEY_N) {
 		if (LIMIT <= 10) {
@@ -121,6 +130,15 @@ int main() {
 		LIMIT++;
 	}
 	if (keyInput == KEY_Y) {
+#else
+	string kInput;
+	cin >> kInput;
+	while (kInput != "y" && kInput != "n") {
+		cout << "Incorrect input, try again y/n" << endl;
+		cin >> kInput;
+	}
+	if (kInput == "y") {
+#endif
 		cout << "Enter MIDDLE name here >> " << flush;
 		cin >> MidNm;
 		MidNmVal = convert(MidNm);
@@ -146,9 +164,11 @@ int main() {
 	cout << "Your lucky number is " << LuckyNumber << "!! This means that you " << lucky[LuckyNumber - 1] << endl;
 
 	cout << "Press any key to exit . . ." << endl;
+#ifdef _WIN32
 	while (true) {
 		if (_kbhit()) {
 			return EXIT_SUCCESS;
 		}
 	}
+#endif
 }
